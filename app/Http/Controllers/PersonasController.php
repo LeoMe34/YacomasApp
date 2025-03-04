@@ -9,13 +9,22 @@ class PersonasController extends Controller
 {
     public function index()
     {
-        $personas = Persona::all();
-        return view('personas.index', compact('personas'));
+        try {
+            $personas = Persona::all(); // O cualquier otro código que uses para obtener personas
+            return view('personas.index', compact('personas'));
+        } catch (\Exception $e) {
+            // Si ocurre algún error, lo mostramos en el log
+            \Log::error('Error al recuperar las personas: ' . $e->getMessage());
+            return response()->view('errors.500', [], 500); // O devuelve un error personalizado
+        }
     }
+
 
     public function create()
     {
-        return view('personas.create');
+        $estudios = ['Ninguno', 'Tecnico', 'Licenciatura', 'Maestria', 'Doctorado', 'Otro'];
+        $tiposAsist = ['Estudiante', 'Docente', 'Academico', 'Publico general'];
+        return view('personas.createPersona', compact('estudios', 'tiposAsist')); // Ruta corregida
     }
 
     public function store(Request $request)
@@ -24,14 +33,13 @@ class PersonasController extends Controller
             'nombre' => 'required|string|max:255',
             'apellidoPat' => 'required|string|max:255',
             'apellidoMat' => 'required|string|max:255',
-            'fechaNacimiento' => 'required|dateTime',
-            'telefono' => 'required|string',
-            'estado' => 'required|string',
-            'ciudad' => 'required|string',
-            'sexo' => 'required|string',
-            'estudio' => 'nullable|required|string',
-            'tipoAsist' => 'nullable|required|string',
-
+            'fechaNacimiento' => 'required|date', // Corrección en validación
+            'telefono' => 'nullable|string',
+            'estado' => 'nullable|string',
+            'ciudad' => 'nullable|string',
+            'sexo' => 'nullable|string',
+            'estudio' => 'nullable|string',
+            'tipoAsist' => 'nullable|string',
         ]);
 
         Persona::create([
@@ -40,15 +48,16 @@ class PersonasController extends Controller
             'apellidoMat' => $request->apellidoMat,
             'estudio' => $request->estudio,
             'tipoAsist' => $request->tipoAsist,
-            'datos_adicio' => [
+            'fechaNacimiento' => $request->fechaNacimiento,
+            'datos_adicio' => json_encode([
                 'telefono' => $request->telefono,
-                'estado' => $request->direccion,
+                'estado' => $request->estado, // Corrección aquí
                 'ciudad' => $request->ciudad,
                 'sexo' => $request->sexo
-            ],
+            ]),
         ]);
 
-        return redirect()->route('personas.index')->with('success', 'Persona creada con éxito');
+        return redirect()->route('personas.index')->with('success', 'Persona creada con éxito'); // Ruta corregida
     }
 
     public function show(Persona $persona)
@@ -73,15 +82,15 @@ class PersonasController extends Controller
             'apellidoMat' => $request->apellidoMat,
             'estudio' => $request->estudio,
             'tipoAsist' => $request->tipoAsist,
-            'datos_adicio' => [
+            'datos_adicio' => json_encode([
                 'telefono' => $request->telefono,
-                'estado' => $request->direccion,
+                'estado' => $request->estado, // Corrección aquí
                 'ciudad' => $request->ciudad,
                 'sexo' => $request->sexo
-            ],
+            ]),
         ]);
 
-        return redirect()->route('personas.index')->with('success', 'Persona actualizada');
+        return redirect()->route('personas.index')->with('success', 'Persona actualizada'); // Ruta corregida
     }
 
     public function destroy(Persona $persona)
