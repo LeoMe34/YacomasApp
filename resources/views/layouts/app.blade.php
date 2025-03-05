@@ -8,6 +8,8 @@
     <!-- Aquí puedes incluir tus hojas de estilo (CSS) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABQ1z7T2K4v24p3I1B8zL3uU4zM3aCZ6LF2V28WJ12jGGdP1z5U4Hqq" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body>
