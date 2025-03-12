@@ -81,12 +81,15 @@
                 <div class="col-md-6 mb-3">
                     <label for="estudio" class="form-label">Nivel de Estudio</label>
                     <select class="form-select" id="estudio" name="estudio">
-                        <option value="Primaria" {{ old('estudio', $persona->estudio ?? '') == 'Primaria' ? 'selected' : '' }}>Primaria</option>
-                        <option value="Secundaria" {{ old('estudio', $persona->estudio ?? '') == 'Secundaria' ? 'selected' : '' }}>Secundaria</option>
-                        <option value="Preparatoria" {{ old('estudio', $persona->estudio ?? '') == 'Preparatoria' ? 'selected' : '' }}>Preparatoria</option>
-                        <option value="Universidad" {{ old('estudio', $persona->estudio ?? '') == 'Universidad' ? 'selected' : '' }}>Universidad</option>
-                        <option value="Técnico" {{ old('estudio', $persona->estudio ?? '') == 'Técnico' ? 'selected' : '' }}>
-                            Técnico</option>
+                        <option value="Ninguno" {{ old('estudio', $persona->estudio ?? '') == 'Ninguno' ? 'selected' : '' }}>
+                            Ninguno</option>
+                        <option value="Tecnico" {{ old('estudio', $persona->estudio ?? '') == 'Tecnico' ? 'selected' : '' }}>
+                            Tecnico</option>
+                        <option value="Licenciatura" {{ old('estudio', $persona->estudio ?? '') == 'Licenciatura' ? 'selected' : '' }}>Licenciatura</option>
+                        <option value="Maestria" {{ old('estudio', $persona->estudio ?? '') == 'Maestria' ? 'selected' : '' }}>Maestria</option>
+                        <option value="Doctorado" {{ old('estudio', $persona->estudio ?? '') == 'Doctorado' ? 'selected' : '' }}>Doctorado</option>
+                        <option value="Otro" {{ old('estudio', $persona->estudio ?? '') == 'Otro' ? 'selected' : '' }}>
+                            Otro</option>
                     </select>
                     @error('estudio') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
@@ -96,7 +99,8 @@
                     <select class="form-select" id="tipoAsist" name="tipoAsist">
                         <option value="Docente" {{ old('tipoAsist', $persona->tipoAsist ?? '') == 'Docente' ? 'selected' : '' }}>Docente</option>
                         <option value="Estudiante" {{ old('tipoAsist', $persona->tipoAsist ?? '') == 'Estudiante' ? 'selected' : '' }}>Estudiante</option>
-                        <option value="Administrativo" {{ old('tipoAsist', $persona->tipoAsist ?? '') == 'Administrativo' ? 'selected' : '' }}>Administrativo</option>
+                        <option value="Academico" {{ old('tipoAsist', $persona->tipoAsist ?? '') == 'Academico' ? 'selected' : '' }}>Academico</option>
+                        <option value="Publico general" {{ old('tipoAsist', $persona->tipoAsist ?? '') == 'Publico general' ? 'selected' : '' }}>Publico general</option>
                     </select>
                     @error('tipoAsist') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
